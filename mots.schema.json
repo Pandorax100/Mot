@@ -1,0 +1,173 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/MotsSchemaElement"
+    },
+    "definitions": {
+        "MotsSchemaElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "registration": {
+                    "type": "string"
+                },
+                "make": {
+                    "type": "string"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "firstUsedDate": {
+                    "type": "string"
+                },
+                "fuelType": {
+                    "$ref": "#/definitions/FuelType"
+                },
+                "primaryColour": {
+                    "$ref": "#/definitions/PrimaryColour"
+                },
+                "motTests": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MotTest"
+                    }
+                }
+            },
+            "required": [
+                "fuelType",
+                "make",
+                "model",
+                "motTests",
+                "primaryColour",
+                "registration"
+            ],
+            "title": "MotsSchemaElement"
+        },
+        "MotTest": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "completedDate": {
+                    "type": "string"
+                },
+                "testResult": {
+                    "$ref": "#/definitions/TestResult"
+                },
+                "expiryDate": {
+                    "type": "string"
+                },
+                "odometerValue": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "odometerUnit": {
+                    "$ref": "#/definitions/OdometerUnit"
+                },
+                "motTestNumber": {
+                    "type": "string"
+                },
+                "rfrAndComments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RfrAndComment"
+                    }
+                }
+            },
+            "required": [
+                "completedDate",
+                "motTestNumber",
+                "odometerValue",
+                "rfrAndComments",
+                "testResult"
+            ],
+            "title": "MotTest"
+        },
+        "RfrAndComment": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/definitions/Type"
+                }
+            },
+            "required": [
+                "text",
+                "type"
+            ],
+            "title": "RfrAndComment"
+        },
+        "FuelType": {
+            "type": "string",
+            "enum": [
+                "Petrol",
+                "Diesel",
+                "Electric",
+                "Gas Bi-Fuel",
+                "LPG",
+                "Other",
+                "Hybrid Electric (Clean)",
+                "Fuel Cells",
+                "Gas",
+                "Steam",
+                "LNG"
+            ],
+            "title": "FuelType"
+        },
+        "OdometerUnit": {
+            "type": "string",
+            "enum": [
+                "mi",
+                "km"
+            ],
+            "title": "OdometerUnit"
+        },
+        "Type": {
+            "type": "string",
+            "enum": [
+                "ADVISORY",
+                "USER ENTERED",
+                "FAIL",
+                "PRS",
+                "MINOR"
+            ],
+            "title": "Type"
+        },
+        "TestResult": {
+            "type": "string",
+            "enum": [
+                "PASSED",
+                "FAILED"
+            ],
+            "title": "TestResult"
+        },
+        "PrimaryColour": {
+            "type": "string",
+            "enum": [
+                "Silver",
+                "Red",
+                "Blue",
+                "Black",
+                "Orange",
+                "Grey",
+                "Green",
+                "Gold",
+                "Multi-colour",
+                "White",
+                "Maroon",
+                "Yellow",
+                "Purple",
+                "Cream",
+                "Brown",
+                "Beige",
+                "Pink",
+                "Turquoise",
+                "Bronze"
+            ],
+            "title": "PrimaryColour"
+        }
+    }
+}
