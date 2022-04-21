@@ -14,15 +14,6 @@ public sealed class MotService : IMotService, IDisposable
     /// <summary>
     /// Initializes a new instance of the <see cref="MotService"/> class.
     /// </summary>
-    /// <param name="client">The <see cref="HttpClient"/> to make requests with.</param>
-    public MotService(HttpClient client)
-    {
-        _client = client;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MotService"/> class.
-    /// </summary>
     /// <param name="apiKey">Your MOT API Key.</param>
     public MotService(string apiKey)
     {
