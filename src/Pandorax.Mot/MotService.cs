@@ -40,7 +40,7 @@ public sealed class MotService : IMotService, IDisposable
             return new List<Vehicle>();
         }
 
-        _ = response.EnsureSuccessStatusCode();
+        response.EnsureSuccessStatusCode();
 
         string json = await response.Content.ReadAsStringAsync();
 
@@ -59,7 +59,7 @@ public sealed class MotService : IMotService, IDisposable
             return new List<Vehicle>();
         }
 
-        _ = response.EnsureSuccessStatusCode();
+        response.EnsureSuccessStatusCode();
 
         string json = await response.Content.ReadAsStringAsync();
 
@@ -83,7 +83,7 @@ public sealed class MotService : IMotService, IDisposable
             return null;
         }
 
-        _ = response.EnsureSuccessStatusCode();
+        response.EnsureSuccessStatusCode();
 
         string json = await response.Content.ReadAsStringAsync();
 
@@ -108,7 +108,7 @@ public sealed class MotService : IMotService, IDisposable
             return null;
         }
 
-        _ = response.EnsureSuccessStatusCode();
+        response.EnsureSuccessStatusCode();
 
         string json = await response.Content.ReadAsStringAsync();
 
