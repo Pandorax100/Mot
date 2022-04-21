@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <Version>0.0.0-alpha1</Version>
+    <Version>0.0.0-alpha2</Version>
     <Authors>Liam</Authors>
     <PackageId>Pandorax.Mot.DependencyInjection</PackageId>
     <Description>Pandorax.Mot extensions for ASP.NET Core</Description>
