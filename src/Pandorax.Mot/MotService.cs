@@ -45,7 +45,12 @@ public sealed class MotService : IMotService, IDisposable
     /// <inheritdoc />
     public async Task<IList<Vehicle>> GetMotsByPageAsync(int page)
     {
-        HttpResponseMessage response = await _client.GetAsync($"/trade/vehicles/mot-tests?page={page}");
+        using HttpResponseMessage response = await _client.GetAsync($"/trade/vehicles/mot-tests?page={page}");
+
+        if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            return new List<Vehicle>();
+        }
 
         _ = response.EnsureSuccessStatusCode();
 
@@ -59,7 +64,12 @@ public sealed class MotService : IMotService, IDisposable
     /// <inheritdoc />
     public async Task<IList<Vehicle>> GetMotsByDateAsync(DateTime date, int page)
     {
-        HttpResponseMessage response = await _client.GetAsync($"/trade/vehicles/mot-tests?date={date:yyyyMMdd}&page={page}");
+        using HttpResponseMessage response = await _client.GetAsync($"/trade/vehicles/mot-tests?date={date:yyyyMMdd}&page={page}");
+
+        if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            return new List<Vehicle>();
+        }
 
         _ = response.EnsureSuccessStatusCode();
 
@@ -78,15 +88,21 @@ public sealed class MotService : IMotService, IDisposable
             throw new ArgumentNullException(nameof(registration));
         }
 
-        HttpResponseMessage response = await _client.GetAsync($"/trade/vehicles/mot-tests?registration={registration}");
+        using HttpResponseMessage response = await _client.GetAsync($"/trade/vehicles/mot-tests?registration={registration}");
+
+        if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            return null;
+        }
 
         _ = response.EnsureSuccessStatusCode();
 
         string json = await response.Content.ReadAsStringAsync();
 
-        Vehicle? vehicle = JsonSerializer.Deserialize<Vehicle>(json);
+        // The api returns an array of one vehicle for registration requests
+        List<Vehicle>? vehicles = JsonSerializer.Deserialize<List<Vehicle>>(json);
 
-        return vehicle;
+        return vehicles?.FirstOrDefault();
     }
 
     /// <inheritdoc />
@@ -97,14 +113,20 @@ public sealed class MotService : IMotService, IDisposable
             throw new ArgumentNullException(nameof(vehicleId));
         }
 
-        HttpResponseMessage response = await _client.GetAsync($"/trade/vehicles/mot-tests?vehicleId={vehicleId}");
+        using HttpResponseMessage response = await _client.GetAsync($"/trade/vehicles/mot-tests?vehicleId={vehicleId}");
+
+        if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            return null;
+        }
 
         _ = response.EnsureSuccessStatusCode();
 
         string json = await response.Content.ReadAsStringAsync();
 
-        Vehicle? vehicle = JsonSerializer.Deserialize<Vehicle>(json);
+        // The api returns an array of one vehicle for id requests
+        List<Vehicle>? vehicles = JsonSerializer.Deserialize<List<Vehicle>>(json);
 
-        return vehicle;
+        return vehicles?.FirstOrDefault();
     }
 }
