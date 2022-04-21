@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Pandorax.Mot.Converters;
 
 namespace Pandorax.Mot.Models;
 
@@ -11,7 +12,8 @@ public class Vehicle
     /// Gets or sets the date the vehicle was first used.
     /// </summary>
     [JsonPropertyName("firstUsedDate")]
-    public string? FirstUsedDate { get; set; }
+    [JsonConverter(typeof(DotSeparatedDateConverter))]
+    public DateTime? FirstUsedDate { get; set; }
 
     /// <summary>
     /// Gets or sets the type of fuel the vehicle takes.

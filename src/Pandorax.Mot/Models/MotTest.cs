@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Pandorax.Mot.Converters;
 
 namespace Pandorax.Mot.Models;
 
@@ -11,13 +12,15 @@ public class MotTest
     /// Gets or sets the date on which the test was completed.
     /// </summary>
     [JsonPropertyName("completedDate")]
-    public string CompletedDate { get; set; } = null!;
+    [JsonConverter(typeof(CompletedDateConverter))]
+    public DateTime CompletedDate { get; set; }
 
     /// <summary>
     /// Gets or sets the date on which the MOT expires.
     /// </summary>
     [JsonPropertyName("expiryDate")]
-    public string? ExpiryDate { get; set; }
+    [JsonConverter(typeof(DotSeparatedDateConverter))]
+    public DateTime? ExpiryDate { get; set; }
 
     /// <summary>
     /// Gets or sets the MOT test number.

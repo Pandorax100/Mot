@@ -20,7 +20,7 @@ public interface IMotService
     /// <summary>
     /// Gets all the MOT tests for a given page.
     /// </summary>
-    /// <param name="page">The page of mots to get. Page starts at 0 and end at around 50000 when no more results are returned.</param>
+    /// <param name="page">The page of mots to get. <paramref name="page"/> starts at 0 and end at around 50000 when no more results are returned.</param>
     /// <returns>A List of vehicles on the page.</returns>
     Task<IList<Vehicle>> GetMotsByPageAsync(int page);
 

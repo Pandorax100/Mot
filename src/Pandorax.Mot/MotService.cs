@@ -9,6 +9,11 @@ namespace Pandorax.Mot;
 /// </summary>
 public sealed class MotService : IMotService, IDisposable
 {
+    private static readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
+    {
+        NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowReadingFromString,
+    };
+
     private readonly HttpClient _client;
 
     /// <summary>
@@ -44,7 +49,7 @@ public sealed class MotService : IMotService, IDisposable
 
         string json = await response.Content.ReadAsStringAsync();
 
-        List<Vehicle>? vehicles = JsonSerializer.Deserialize<List<Vehicle>>(json);
+        List<Vehicle>? vehicles = JsonSerializer.Deserialize<List<Vehicle>>(json, _jsonSerializerOptions);
 
         return vehicles ?? new List<Vehicle>();
     }
@@ -63,7 +68,7 @@ public sealed class MotService : IMotService, IDisposable
 
         string json = await response.Content.ReadAsStringAsync();
 
-        List<Vehicle>? vehicles = JsonSerializer.Deserialize<List<Vehicle>>(json);
+        List<Vehicle>? vehicles = JsonSerializer.Deserialize<List<Vehicle>>(json, _jsonSerializerOptions);
 
         return vehicles ?? new List<Vehicle>();
     }
@@ -88,7 +93,7 @@ public sealed class MotService : IMotService, IDisposable
         string json = await response.Content.ReadAsStringAsync();
 
         // The api returns an array of one vehicle for registration requests
-        List<Vehicle>? vehicles = JsonSerializer.Deserialize<List<Vehicle>>(json);
+        List<Vehicle>? vehicles = JsonSerializer.Deserialize<List<Vehicle>>(json, _jsonSerializerOptions);
 
         return vehicles?.FirstOrDefault();
     }
@@ -113,7 +118,7 @@ public sealed class MotService : IMotService, IDisposable
         string json = await response.Content.ReadAsStringAsync();
 
         // The api returns an array of one vehicle for id requests
-        List<Vehicle>? vehicles = JsonSerializer.Deserialize<List<Vehicle>>(json);
+        List<Vehicle>? vehicles = JsonSerializer.Deserialize<List<Vehicle>>(json, _jsonSerializerOptions);
 
         return vehicles?.FirstOrDefault();
     }
