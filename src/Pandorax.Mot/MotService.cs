@@ -17,10 +17,7 @@ public sealed class MotService : IMotService, IDisposable
     /// <param name="apiKey">Your MOT API Key.</param>
     public MotService(string apiKey)
     {
-        if (apiKey is null)
-        {
-            throw new ArgumentNullException(nameof(apiKey));
-        }
+        ArgumentNullException.ThrowIfNull(apiKey);
 
         _client = new HttpClient();
         _client.DefaultRequestHeaders.Add(MotConstants.ApiKeyHeaderName, apiKey);
