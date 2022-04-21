@@ -76,10 +76,10 @@ public sealed class MotService : IMotService, IDisposable
     /// <inheritdoc />
     public async Task<Vehicle?> GetMotsByRegistrationAsync(string registration)
     {
-        if (registration is null)
-        {
-            throw new ArgumentNullException(nameof(registration));
-        }
+        ArgumentNullException.ThrowIfNull(registration);
+
+        // Spaces in registrations always return 404 results.
+        registration = registration.Replace(" ", string.Empty);
 
         using HttpResponseMessage response = await _client.GetAsync($"/trade/vehicles/mot-tests?registration={registration}");
 
@@ -101,10 +101,7 @@ public sealed class MotService : IMotService, IDisposable
     /// <inheritdoc />
     public async Task<Vehicle?> GetMotsByVehicleIdAsync(string vehicleId)
     {
-        if (vehicleId is null)
-        {
-            throw new ArgumentNullException(nameof(vehicleId));
-        }
+        ArgumentNullException.ThrowIfNull(vehicleId);
 
         using HttpResponseMessage response = await _client.GetAsync($"/trade/vehicles/mot-tests?vehicleId={vehicleId}");
 
