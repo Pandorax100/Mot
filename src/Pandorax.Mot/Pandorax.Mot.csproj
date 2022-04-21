@@ -6,14 +6,29 @@
     <Nullable>enable</Nullable>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet">
     <Version>0.0.0-alpha1</Version>
     <Authors>Liam</Authors>
     <PackageId>Pandorax.Mot</PackageId>
     <Description>A C# Wrapper around the DVSA MOT History API. https://dvsa.github.io/mot-history-api-documentation</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Pandorax100/Mot</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Pandorax100/Mot</RepositoryUrl>
+    <PackageTags>Mot,DVSA,MOT API</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
     <AdditionalFiles Include="../../stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
