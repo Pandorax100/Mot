@@ -2,26 +2,43 @@
 ###############################
 # Core EditorConfig Options   #
 ###############################
+
+root = true
+
 # All files
 [*]
 indent_style = space
-
-[*.json]
+spelling_languages = en-gb
 insert_final_newline = true
+end_of_line = lf
+
+[*.css]
+indent_size = 2
+charset = utf-8
+
+[*.js]
+indent_size = 2
+charset = utf-8
+
+[*.cshtml]
+indent_size = 2
+charset = utf-8
 
 # XML project files
 [*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
 indent_size = 2
+charset = utf-8
 
 # XML config files
 [*.{props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}]
 indent_size = 2
+charset = utf-8
 
 # Code files
 [*.{cs,csx,vb,vbx}]
 indent_size = 4
-insert_final_newline = true
 charset = utf-8
+
 ###############################
 # .NET Coding Conventions     #
 ###############################
@@ -81,6 +98,8 @@ csharp_style_deconstructed_variable_declaration = true:suggestion
 csharp_prefer_simple_default_expression = true:suggestion
 csharp_style_pattern_local_over_anonymous_function = true:suggestion
 csharp_style_inlined_variable_declaration = true:suggestion
+csharp_style_namespace_declarations = file_scoped:silent
+
 ###############################
 # C# Formatting Rules         #
 ###############################
@@ -93,6 +112,7 @@ csharp_new_line_before_members_in_object_initializers = true
 csharp_new_line_before_members_in_anonymous_types = true
 csharp_new_line_between_query_expression_clauses = true
 # Indentation preferences
+csharp_indent_braces = false
 csharp_indent_case_contents = true
 csharp_indent_switch_labels = true
 csharp_indent_labels = flush_left
@@ -112,18 +132,70 @@ csharp_space_between_method_call_empty_parameter_list_parentheses = false
 csharp_preserve_single_line_statements = true
 csharp_preserve_single_line_blocks = true
 
-# IDE0160: Convert to block scoped namespace
-csharp_style_namespace_declarations = file_scoped
+###############################
+# C# Naming Rules             #
+###############################
+dotnet_naming_symbols.field_members.applicable_kinds = field
+dotnet_naming_symbols.field_members.applicable_accessibilities = private
+dotnet_naming_symbols.field_members.required_modifiers =
+
+dotnet_naming_style.begins_with_underscore.required_prefix = _
+dotnet_naming_style.begins_with_underscore.required_suffix =
+dotnet_naming_style.begins_with_underscore.word_separator =
+dotnet_naming_style.begins_with_underscore.capitalization = camel_case
+
+dotnet_naming_rule.field_members_should_begin_with_underscore.severity = suggestion
+dotnet_naming_rule.field_members_should_begin_with_underscore.symbols = field_members
+dotnet_naming_rule.field_members_should_begin_with_underscore.style = begins_with_underscore
 
 # SA1633: File should have header
 dotnet_diagnostic.SA1633.severity = none
+
+# CA2227: Collection properties should be read only
+dotnet_diagnostic.CA2227.severity = none
+
+# SA1101: Prefix local calls with this
+dotnet_diagnostic.SA1101.severity = none
 
 # SA1309: Field names should not begin with underscore
 dotnet_diagnostic.SA1309.severity = none
 dotnet_diagnostic.SX1309.severity = warning
 
-# SA1101: Prefix local calls with this
-dotnet_diagnostic.SA1101.severity = none
+# SA1516: Elements should be separated by blank line
+dotnet_diagnostic.SA1516.severity = none
 
-# CA1716: Identifiers should not match keywords
-dotnet_diagnostic.CA1716.severity = silent
+# CS1591: Missing XML comment for publicly visible type or member
+dotnet_diagnostic.CS1591.severity = none
+
+# IDE0055: Fix formatting
+dotnet_diagnostic.IDE0055.severity = warning
+
+# SA1507: Code should not contain multiple blank lines in a row
+dotnet_diagnostic.SA1507.severity = none
+
+# SA1413: Use trailing comma in multi-line initializers
+dotnet_diagnostic.SA1413.severity = none
+
+# SA1122: Use string.Empty for empty strings
+dotnet_diagnostic.SA1122.severity = none
+
+# SA1513: Closing brace should be followed by blank line
+dotnet_diagnostic.SA1513.severity = none
+
+# CA1848: Use the LoggerMessage delegates
+dotnet_diagnostic.CA1848.severity = none
+
+# CA1305: Specify IFormatProvider
+dotnet_diagnostic.CA1305.severity = none
+
+# SA1512: Single-line comments should not be followed by blank line
+dotnet_diagnostic.SA1512.severity = none
+
+# SA1505: Opening braces should not be followed by blank line
+dotnet_diagnostic.SA1505.severity = none
+
+# SA1508: Closing braces should not be preceded by blank line
+dotnet_diagnostic.SA1508.severity = none
+
+# SA1623: Property summary documentation should match accessors
+dotnet_diagnostic.SA1623.severity = none
