@@ -1,4 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
+using Pandorax.Mot.Authorization;
+using Pandorax.Mot.Services;
 
 namespace Pandorax.Mot.DependencyInjection;
 
@@ -9,20 +11,25 @@ namespace Pandorax.Mot.DependencyInjection;
 public static class ServiceCollectionExtensions
 {
     /// <summary>
-    /// Registers an <see cref="IMotService"/> in the <see cref="IServiceCollection"/>.
+    /// Registers an <see cref="IMotHistoryService"/> in the <see cref="IServiceCollection"/>.
     /// Use this method when using dependency injection in your application, such as with
     /// ASP.NET Core.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
-    /// <param name="apiKey">Your MOT API key.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddMot(this IServiceCollection services, string apiKey)
+    public static MotHistoryApplicationBuilder AddMotHistoryApi(this IServiceCollection services)
     {
-        ArgumentNullException.ThrowIfNull(services);
-        ArgumentNullException.ThrowIfNull(apiKey);
+        services.AddHttpClient<MotHistoryHttpClient>()
+            .AddHttpMessageHandler<OAuthDelegatingHandler>();
 
-        services.AddScoped<IMotService, MotService>(provider => new MotService(apiKey));
+        services.AddHttpClient<TokenService>();
 
-        return services;
+        services.AddScoped<OAuthDelegatingHandler>();
+
+        services.AddMemoryCache();
+
+        services.AddScoped<IMotHistoryService, MotHistoryService>();
+
+        return new MotHistoryApplicationBuilder(services);
     }
 }

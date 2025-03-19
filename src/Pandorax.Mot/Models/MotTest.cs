@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using Pandorax.Mot.Converters;
 
 namespace Pandorax.Mot.Models;
 
@@ -12,43 +11,53 @@ public class MotTest
     /// Gets or sets the date on which the test was completed.
     /// </summary>
     [JsonPropertyName("completedDate")]
-    [JsonConverter(typeof(CompletedDateConverter))]
     public DateTime CompletedDate { get; set; }
+
+    /// <summary>
+    /// Gets or sets the result of the test, whether the vehicle passed or failed.
+    /// </summary>
+    [JsonPropertyName("testResult")]
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public TestResult TestResult { get; set; }
 
     /// <summary>
     /// Gets or sets the date on which the MOT expires.
     /// </summary>
     [JsonPropertyName("expiryDate")]
-    [JsonConverter(typeof(DotSeparatedDateConverter))]
-    public DateTime? ExpiryDate { get; set; }
+    public DateOnly? ExpiryDate { get; set; }
 
     /// <summary>
     /// Gets or sets the MOT test number.
     /// </summary>
     [JsonPropertyName("motTestNumber")]
-    public string MotTestNumber { get; set; } = null!;
+    public string? MotTestNumber { get; set; }
 
     /// <summary>
     /// Gets or sets the unit used for the odometer reading.
     /// </summary>
     [JsonPropertyName("odometerUnit")]
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public OdometerUnit? OdometerUnit { get; set; }
 
     /// <summary>
     /// Gets or sets the value of the odometer.
     /// </summary>
     [JsonPropertyName("odometerValue")]
-    public int OdometerValue { get; set; }
+    public int? OdometerValue { get; set; }
+
+    [JsonPropertyName("odometerResultType")]
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public OdometerResultType OdometerResultType { get; set; }
+
+    /// <summary>
+    /// Name of the Authorised Test Facility (ATF) where the test was conducted.
+    /// </summary>
+    [JsonPropertyName("location")]
+    public string? Location { get; set; }
 
     /// <summary>
     /// Gets or sets the comments supplied by the tester.
     /// </summary>
-    [JsonPropertyName("rfrAndComments")]
-    public IList<RfrAndComment> RfrAndComments { get; set; } = new List<RfrAndComment>();
-
-    /// <summary>
-    /// Gets or sets the result of the test, whether the vehicle passed or failed.
-    /// </summary>
-    [JsonPropertyName("testResult")]
-    public TestResult TestResult { get; set; }
+    [JsonPropertyName("defects")]
+    public IList<Defect> Defects { get; set; } = [];
 }

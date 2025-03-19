@@ -4,7 +4,9 @@
       "usingDirectivesPlacement": "outsideNamespace"
     },
     "documentationRules": {
-      "documentInternalElements": false
+      "documentInternalElements": false,
+      "documentExposedElements": false,
+      "documentInterfaces": false
     }
   }
 }

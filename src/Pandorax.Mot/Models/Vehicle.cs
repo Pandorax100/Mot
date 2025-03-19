@@ -1,53 +1,68 @@
 using System.Text.Json.Serialization;
-using Pandorax.Mot.Converters;
 
-namespace Pandorax.Mot.Models;
-
-/// <summary>
-/// Basic vehicle details with mot results.
-/// </summary>
-public class Vehicle
+namespace Pandorax.Mot.Models
 {
     /// <summary>
-    /// Gets or sets the date the vehicle was first used.
+    /// Vehicle data for vehicles with at least one MOT test.
     /// </summary>
-    [JsonPropertyName("firstUsedDate")]
-    [JsonConverter(typeof(DotSeparatedDateConverter))]
-    public DateTime? FirstUsedDate { get; set; }
+    public class Vehicle
+    {
+        [JsonPropertyName("hasOutstandingRecall")]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public OutstandingRecallStatus HasOutstandingRecall { get; set; }
 
-    /// <summary>
-    /// Gets or sets the type of fuel the vehicle takes.
-    /// </summary>
-    [JsonPropertyName("fuelType")]
-    public string FuelType { get; set; } = null!;
+        /// <summary>
+        /// Registration number of the vehicle.
+        /// </summary>
+        [JsonPropertyName("registration")]
+        public string? Registration { get; set; }
 
-    /// <summary>
-    /// Gets or sets the make of the vehicle.
-    /// </summary>
-    [JsonPropertyName("make")]
-    public string Make { get; set; } = null!;
+        /// <summary>
+        /// The vehicle make.
+        /// </summary>
+        [JsonPropertyName("make")]
+        public string? Make { get; set; }
 
-    /// <summary>
-    /// Gets or sets the model of the vehicle.
-    /// </summary>
-    [JsonPropertyName("model")]
-    public string Model { get; set; } = null!;
+        /// <summary>
+        /// The vehicle model.
+        /// </summary>
+        [JsonPropertyName("model")]
+        public string? Model { get; set; }
 
-    /// <summary>
-    /// Gets or sets the MOT tests for this vehicle.
-    /// </summary>
-    [JsonPropertyName("motTests")]
-    public List<MotTest> MotTests { get; set; } = new();
+        /// <summary>
+        /// Date the vehicle is first used in Great Britain, Northern Ireland or abroad.
+        /// </summary>
+        [JsonPropertyName("firstUsedDate")]
+        public DateOnly? FirstUsedDate { get; set; }
 
-    /// <summary>
-    /// Gets or sets the colour of this vehicle.
-    /// </summary>
-    [JsonPropertyName("primaryColour")]
-    public string PrimaryColour { get; set; } = null!;
+        /// <summary>
+        /// The type of fuel the vehicle uses.
+        /// </summary>
+        [JsonPropertyName("fuelType")]
+        public string? FuelType { get; set; }
 
-    /// <summary>
-    /// Gets or sets the registration number of this vehicle.
-    /// </summary>
-    [JsonPropertyName("registration")]
-    public string Registration { get; set; } = null!;
+        [JsonPropertyName("primaryColour")]
+        public string? PrimaryColour { get; set; }
+
+        /// <summary>
+        /// Date the vehicle is first registered in Great Britain, Northern Ireland or abroad.
+        /// </summary>
+        [JsonPropertyName("registrationDate")]
+        public DateOnly? RegistrationDate { get; set; }
+
+        /// <summary>
+        /// Date the vehicle was manufactured.
+        /// </summary>
+        [JsonPropertyName("manufactureDate")]
+        public DateOnly? ManufactureDate { get; set; }
+
+        /// <summary>
+        /// Engine cylinder capacity (cc) of the vehicle.
+        /// </summary>
+        [JsonPropertyName("engineSize")]
+        public string? EngineSize { get; set; }
+
+        [JsonPropertyName("motTests")]
+        public List<MotTest> MotTests { get; set; } = [];
+    }
 }
