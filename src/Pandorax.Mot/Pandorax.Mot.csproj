@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
-    <Version>0.0.0-alpha4</Version>
+    <Version>0.0.0-alpha5</Version>
     <Authors>Liam</Authors>
     <PackageId>Pandorax.Mot</PackageId>
     <Description>A C# Wrapper around the DVSA MOT History API. https://dvsa.github.io/mot-history-api-documentation</Description>
