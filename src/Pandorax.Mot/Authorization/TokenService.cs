@@ -23,7 +23,7 @@ internal sealed class TokenService(IOptions<MotHistoryOptions> options, HttpClie
         // Otherwise, request a new token
         var tokenRequest = new ClientCredentialsTokenRequest
         {
-            Address = MotHistoryConstants.DefaultTokenUrl,
+            Address = _options.TokenUrl,
             ClientId = _options.ClientId,
             ClientSecret = _options.ClientSecret,
             Scope = MotHistoryConstants.DefaultScopeUrl,

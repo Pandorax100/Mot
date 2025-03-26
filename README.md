@@ -27,6 +27,7 @@ public class Startup
                     options.ApiKey = "your-api-key";
                     options.ClientId = "your-client-id";
                     options.ClientSecret = "your-client-secret";
+                    options.TokenUrl = "your-token-url";
                 });
     }
 }
